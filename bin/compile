@@ -65,7 +65,7 @@ php_archive_name=$php_dirname.tar.bz2
 # Download PHP if necessary.
 if [ ! -f $php_archive_name ]
 then
-    curl -Lo $php_archive_name http://us1.php.net/get/php-${php_verison}.tar.bz2/from/this/mirror
+    curl -Lo $php_archive_name http://us1.php.net/get/php-${php_version}.tar.bz2/from/this/mirror
 fi
 
 # Clean and extract PHP.
