@@ -31,7 +31,7 @@ tar jxf $mcrypt_archive_name
 pushd $mcrypt_dirname
 ./configure --prefix=/app/vendor/mcrypt \
   --disable-posix-threads --enable-dynamic-loading
-make -s -j4
+make -j4
 make install -s
 popd
 
@@ -53,7 +53,7 @@ tar jxf $httpd_archive_name
 # Build and install Apache.
 pushd $httpd_dirname
 ./configure --prefix=/app/apache --enable-rewrite --with-included-apr
-make -s -j4
+make -j4
 make install -s
 popd
 
@@ -79,7 +79,7 @@ pushd $php_dirname
 --with-iconv --with-gd --with-curl=/usr/lib                         \
 --with-config-file-path=/app/php --enable-soap=shared               \
 --with-openssl --with-mcrypt=/app/vendor/mcrypt --enable-sockets
-make -s -j4
+make -j4
 make install -s
 popd
 
@@ -92,15 +92,15 @@ cp /usr/lib/libmysqlclient.so.16 /app/php/lib/php
 # $PATH manipulation Necessary for 'pecl install', which relies on
 # PHP binaries relative to $PATH.
 
-export PATH=/app/php/bin:$PATH
-/app/php/bin/pecl channel-update pecl.php.net
+#export PATH=/app/php/bin:$PATH
+#/app/php/bin/pecl channel-update pecl.php.net
 
 # Use defaults for apc build prompts.
-yes '' | /app/php/bin/pecl install apc
+#yes '' | /app/php/bin/pecl install apc
 
 # Sanitize default cgi-bin to rid oneself of Apache sample
 # programs.
-find /app/apache/cgi-bin/ -mindepth 1 -print0 | xargs -0 rm -r
+#find /app/apache/cgi-bin/ -mindepth 1 -print0 | xargs -0 rm -r
 
 # Stamp and archive binaries.
 pushd /app
