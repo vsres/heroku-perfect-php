@@ -31,7 +31,7 @@ tar jxf $mcrypt_archive_name
 pushd $mcrypt_dirname
 ./configure --prefix=/app/vendor/mcrypt \
   --disable-posix-threads --enable-dynamic-loading
-make -s
+make -s -j4
 make install -s
 popd
 
@@ -53,7 +53,7 @@ tar jxf $httpd_archive_name
 # Build and install Apache.
 pushd $httpd_dirname
 ./configure --prefix=/app/apache --enable-rewrite --with-included-apr
-make -s
+make -s -j4
 make install -s
 popd
 
@@ -79,7 +79,7 @@ pushd $php_dirname
 --with-iconv --with-gd --with-curl=/usr/lib                         \
 --with-config-file-path=/app/php --enable-soap=shared               \
 --with-openssl --with-mcrypt=/app/vendor/mcrypt --enable-sockets
-make -s
+make -s -j4
 make install -s
 popd
 
