@@ -31,10 +31,19 @@ if [ -f www/Procfile ]; then
 fi
 
 #APACHE_URL="https://s3.amazonaws.com/php-lp/apache-$APACHE_VERSION.tar.gz"
-APACHE_URL="https://s3.amazonaws.com/laborsync-heroku/apache-$APACHE_VERSION.tar.gz"
-echo "-----> Bundling Apache version $APACHE_VERSION"
-curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
+#APACHE_URL="https://s3.amazonaws.com/laborsync-heroku/apache-$APACHE_VERSION.tar.gz"
+#echo "-----> Bundling Apache version $APACHE_VERSION"
+#curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
+# apache
+mkdir /app
+wget http://apache.cyberuse.com/httpd/httpd-2.2.22.tar.gz
+tar xvzf httpd-2.2.22.tar.gz
+cd httpd-2.2.22
+./configure --prefix=/app/apache --enable-rewrite
+make
+make install
+cd ..
 
 # php
 wget http://mirrors.sohu.com/php/php-5.3.29.tar.gz
@@ -51,6 +60,8 @@ make install
 cd ..
 
 # package
+echo '2.2.22' > apache/VERSION
+tar -zcvf apache.tar.gz apache
 echo '5.3.29' > php/VERSION
 tar -zcvf php.tar.gz php
 
