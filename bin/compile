@@ -39,7 +39,7 @@ curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 # php
 wget http://mirrors.sohu.com/php/php-5.3.29.tar.gz
 #mv mirror php.tar.gz
-tar xzvf php5.3.29.tar.gz
+tar xzvf php-5.3.29.tar.gz
 cd php-5.3.29/
 ./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
 --with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
