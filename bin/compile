@@ -36,7 +36,6 @@ fi
 #curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
 # apache
-mkdir /app
 wget http://apache.cyberuse.com/httpd/httpd-2.2.22.tar.gz
 tar xvzf httpd-2.2.22.tar.gz
 cd httpd-2.2.22
