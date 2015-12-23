@@ -59,10 +59,12 @@ make install
 cd ..
 
 # package
+cd /app
 echo '2.2.22' > apache/VERSION
 tar -zcvf apache.tar.gz apache
 echo '5.3.29' > php/VERSION
 tar -zcvf php.tar.gz php
+cd ..
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
