@@ -50,6 +50,10 @@ make
 make install
 cd ..
 
+# package
+echo '5.3.29' > php/VERSION
+tar -zcvf php.tar.gz php
+
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini php
