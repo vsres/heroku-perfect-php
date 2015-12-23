@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-# Test the environment for a public folder and the index.php file located in that
-if [ -f $1/public/index.php ]; then
+if [ -f $1/index.php ]; then
   echo "PHP" && exit 0
 else
-  echo "ERR" && exit 1
+  echo "no" && exit 1
 fi
-
