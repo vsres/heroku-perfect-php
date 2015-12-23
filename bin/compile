@@ -1,75 +1,62 @@
-#!/bin/bash
-set -uex
-cd /tmp
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
 
-# Heroku revision.  Must match in 'compile' program.
-#
-# Affixed to all vendored binary output to represent changes to the
-# compilation environment without a change to the upstream version,
-# e.g. PHP 5.3.27 without, and then subsequently with, libmcrypt.
-heroku_rev='-1'
+# fail fast
+set -e
 
-# Clear /app directory
-find /app -mindepth 1 -print0 | xargs -0 rm -rf
-
-# Take care of vendoring libmcrypt
+# config
 APACHE_VERSION="2.2.22"
 APACHE_PATH="apache"
+PHP_VERSION="5.3.10"
+PHP_PATH="php"
+
+BIN_DIR=$(dirname $0)
+BUILD_DIR=$1
+CACHE_DIR=$2
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
+
+# include .files when moving things around
+shopt -s dotglob
+
+cd $BUILD_DIR
+
+# move app things to www
+mkdir -p $CACHE_DIR/www
+mv * $CACHE_DIR/www
+mv $CACHE_DIR/www .
+
+# keep Procfile
+if [ -f www/Procfile ]; then
+  mv www/Procfile .
+fi
+
+#APACHE_URL="https://s3.amazonaws.com/php-lp/apache-$APACHE_VERSION.tar.gz"
 APACHE_URL="https://s3.amazonaws.com/laborsync-heroku/apache-$APACHE_VERSION.tar.gz"
 echo "-----> Bundling Apache version $APACHE_VERSION"
 curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
 
-# Take care of vendoring PHP.
-php_version=5.3.29
-php_dirname=php-$php_version
-php_archive_name=$php_dirname.tar.bz2
-
-# Download PHP if necessary.
-if [ ! -f $php_archive_name ]
-then
-    curl -Lo $php_archive_name http://mirrors.sohu.com/php/php-5.3.29.tar.bz2
-fi
-
-# Clean and extract PHP.
-rm -rf $php_dirname
-tar jxf $php_archive_name
-
-# Compile PHP
-pushd $php_dirname
+# php
+wget http://mirrors.sohu.com/php/php-5.3.29.tar.gz
+#mv mirror php.tar.gz
+tar xzvf php5.3.29.tar.gz
+cd php-5.3.29/
 ./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
 --with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
 --with-iconv --with-gd --with-curl=/usr/lib                         \
 --with-config-file-path=/app/php --enable-soap=shared               \
---with-openssl --with-mcrypt=/app/vendor/mcrypt --enable-sockets
-make -j4
-make install -s
-popd
+--with-openssl --enable-sockets
+make
+make install
+cd ..
 
-# Copy in MySQL client library.
-mkdir -p /app/php/lib/php
-cp /usr/lib/libmysqlclient.so.16 /app/php/lib/php
+# update config files
+cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
+cp $LP_DIR/conf/php.ini php
 
-# 'apc' installation
-#
-# $PATH manipulation Necessary for 'pecl install', which relies on
-# PHP binaries relative to $PATH.
-
-#export PATH=/app/php/bin:$PATH
-#/app/php/bin/pecl channel-update pecl.php.net
-
-# Use defaults for apc build prompts.
-#yes '' | /app/php/bin/pecl install apc
-
-# Sanitize default cgi-bin to rid oneself of Apache sample
-# programs.
-#find /app/apache/cgi-bin/ -mindepth 1 -print0 | xargs -0 rm -r
-
-# Stamp and archive binaries.
-pushd /app
-echo $php_version > php/VERSION
-tar -zcf php-"$php_version""$heroku_rev".tar.gz php
-popd
+# make php available on bin
+mkdir -p bin
+ln -s /app/php/bin/php bin/php
 
 cat >>boot.sh <<EOF
 for var in \`env|cut -f1 -d=\`; do
@@ -87,3 +74,6 @@ exec /app/apache/bin/httpd -DNO_DETACH
 EOF
 
 chmod +x boot.sh
+
+# clean the cache
+rm -rf $CACHE_DIR/*
