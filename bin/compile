@@ -19,7 +19,7 @@ LP_DIR=`cd $(dirname $0); cd ..; pwd`
 shopt -s dotglob
 
 cd $BUILD_DIR
-
+echo $PWD 
 # move app things to www
 mkdir -p $CACHE_DIR/www
 mv * $CACHE_DIR/www
@@ -57,14 +57,14 @@ cd php-5.3.29/
 make
 make install
 cd ..
-
+echo $PWD 
 # package
 cd /app
 echo '2.2.22' > apache/VERSION
 tar -zcvf apache.tar.gz apache
 echo '5.3.29' > php/VERSION
 tar -zcvf php.tar.gz php
-
+echo $PWD 
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
@@ -74,6 +74,7 @@ cp $LP_DIR/conf/php.ini php
 mkdir -p bin
 ln -s /app/php/bin/php bin/php
 cd $BUILD_DIR
+echo $PWD 
 cat >>boot.sh <<EOF
 for var in \`env|cut -f1 -d=\`; do
   echo "PassEnv \$var" >> /app/apache/conf/httpd.conf;
