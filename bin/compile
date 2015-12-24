@@ -64,7 +64,13 @@ echo '2.2.22' > apache/VERSION
 tar -zcvf apache.tar.gz apache
 echo '5.3.29' > php/VERSION
 tar -zcvf php.tar.gz php
+mv apache.tar.gz $BUILD_DIR
+mv php.tar.gz $BUILD_DIR
+
+cd $BUILD_DIR
 echo $PWD 
+tar xz apache.tar.gz
+tar xz php.tar.gz
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
@@ -73,8 +79,7 @@ cp $LP_DIR/conf/php.ini php
 # make php available on bin
 mkdir -p bin
 ln -s /app/php/bin/php bin/php
-cd $BUILD_DIR
-echo $PWD 
+
 cat >>boot.sh <<EOF
 for var in \`env|cut -f1 -d=\`; do
   echo "PassEnv \$var" >> /app/apache/conf/httpd.conf;
