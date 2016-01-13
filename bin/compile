@@ -7,7 +7,7 @@ set -e
 # config
 APACHE_VERSION="2.2.22"
 APACHE_PATH="apache"
-PHP_VERSION="5.3.10"
+PHP_VERSION="5.3.29"
 PHP_PATH="php"
 
 BIN_DIR=$(dirname $0)
@@ -36,24 +36,27 @@ fi
 #curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
 # apache
-wget http://apache.cyberuse.com/httpd/httpd-2.2.22.tar.gz
-tar xvzf httpd-2.2.22.tar.gz
-cd httpd-2.2.22
+wget http://apache.cyberuse.com/httpd/httpd-$APACHE_VERSION.tar.gz
+tar xvzf httpd-$APACHE_VERSION.tar.gz
+cd httpd-$APACHE_VERSION
 ./configure --prefix=/app/apache --enable-rewrite
 make
 make install
 cd ..
 
 # php
-wget http://mirrors.sohu.com/php/php-5.3.29.tar.gz
+wget http://mirrors.sohu.com/php/php-$PHP_VERSION.tar.gz
 #mv mirror php.tar.gz
-tar xzvf php-5.3.29.tar.gz
-cd php-5.3.29/
+tar xzvf php-$PHP_VERSION.tar.gz
+cd php-$PHP_VERSION/
 ./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
 --with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
 --with-iconv --with-gd --with-curl=/usr/lib                         \
 --with-config-file-path=/app/php --enable-soap=shared               \
---with-openssl --enable-sockets
+--with-openssl --enable-mbstring --enable-sockets                   \
+--with-imap --with-imap-ssl --enable-zip --enable-ftp               \
+--with-zlib --with-xsl --with-bz2 --enable-exif                     \
+--with-gettext --with-mcrypt
 make
 make install
 cd ..
@@ -68,9 +71,9 @@ cp /usr/lib/php5/20060613/apc.so /app/php/ext/
 cp /usr/include/php5/ext/apc/apc_serializer.h /app/php/include/php/ext/apc/
 # package
 cd /app
-echo '2.2.22' > apache/VERSION
+echo $APACHE_VERSION > apache/VERSION
 tar -zcvf apache.tar.gz apache
-echo '5.3.29' > php/VERSION
+echo $PHP_VERSION > php/VERSION
 tar -zcvf php.tar.gz php
 mv apache.tar.gz $BUILD_DIR
 mv php.tar.gz $BUILD_DIR
