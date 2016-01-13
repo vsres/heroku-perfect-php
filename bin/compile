@@ -54,9 +54,8 @@ cd php-$PHP_VERSION/
 --with-iconv --with-gd --with-curl=/usr/lib                         \
 --with-config-file-path=/app/php --enable-soap=shared               \
 --with-openssl --enable-mbstring --enable-sockets                   \
---with-imap --with-imap-ssl --enable-zip --enable-ftp               \
 --with-zlib --with-xsl --with-bz2 --enable-exif                     \
---with-gettext --with-mcrypt
+--with-gettext --with-mcrypt --enable-zip --enable-ftp --with-rar
 make
 make install
 cd ..
