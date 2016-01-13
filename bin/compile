@@ -54,9 +54,27 @@ cd php-$PHP_VERSION/
 --with-config-file-path=/app/php --enable-soap=shared               \
 --with-openssl --enable-mbstring --enable-sockets                   \
 --with-zlib --with-xsl --with-bz2 --enable-exif                     \
---with-gettext --with-rar --enable-zip --enable-ftp
+--with-gettext --enable-ftp
 make
 make install
+cd ..
+
+# rar
+wget http://pecl.php.net/get/rar-3.0.2.tgz
+gunzip rar-3.0.2.tgz
+tar -xvf rar-3.0.2.tar
+cd rar-3.0.2
+phpize
+./configure && make && make install
+cd ..
+
+# zip
+wget http://pecl.php.net/get/zip-1.12.5.tgz
+gunzip zip-1.12.5.tgz
+tar -xvf zip-1.12.5.tar
+cd zip-1.12.5
+phpize
+./configure && make && make install
 cd ..
 
 # pear
