@@ -34,7 +34,7 @@ fi
 #APACHE_URL="https://s3.amazonaws.com/laborsync-heroku/apache-$APACHE_VERSION.tar.gz"
 #echo "-----> Bundling Apache version $APACHE_VERSION"
 #curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
-apt-get install libc-client-dev
+sudo apt-get install libc-client-dev
 # apache
 wget http://apache.cyberuse.com/httpd/httpd-$APACHE_VERSION.tar.gz
 tar xvzf httpd-$APACHE_VERSION.tar.gz
