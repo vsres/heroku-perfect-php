@@ -35,22 +35,24 @@ fi
 #curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
 # apache
-wget http://archive.apache.org/dist/httpd/httpd-$APACHE_VERSION.tar.gz
-tar xvzf httpd-$APACHE_VERSION.tar.gz
-cd httpd-$APACHE_VERSION
-./configure --prefix=/app/apache --enable-rewrite
-make
-make install
-cd ..
+#wget http://archive.apache.org/dist/httpd/httpd-$APACHE_VERSION.tar.gz
+#tar xvzf httpd-$APACHE_VERSION.tar.gz
+#cd httpd-$APACHE_VERSION
+#./configure --prefix=/app/apache --enable-rewrite
+#make
+#make install
+#cd ..
 
 # php
 wget http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror
 mv mirror php-$PHP_VERSION.tar.gz
 tar xzvf php-$PHP_VERSION.tar.gz
 cd php-$PHP_VERSION/
-./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
+#./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
+./configure --prefix=/app/php     \
 --with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
---with-iconv --with-gd --with-curl=/usr/lib                         \
+--with-iconv --with-gd --with-curl       \
+#--with-iconv --with-gd --with-curl=/usr/lib                         \
 --with-config-file-path=/app/php --enable-soap=shared               \
 --with-openssl --enable-sockets
 make
