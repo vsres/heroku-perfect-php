@@ -35,13 +35,16 @@ fi
 #curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
 # apache
-wget http://archive.apache.org/dist/httpd/httpd-$APACHE_VERSION.tar.gz
-tar xvzf httpd-$APACHE_VERSION.tar.gz
-cd httpd-$APACHE_VERSION
-./configure --prefix=/app/apache --enable-rewrite
-make
-make install
-cd ..
+#wget http://archive.apache.org/dist/httpd/httpd-$APACHE_VERSION.tar.gz
+#tar xvzf httpd-$APACHE_VERSION.tar.gz
+#cd httpd-$APACHE_VERSION
+#./configure --prefix=/app/apache --enable-rewrite
+#make
+#make install
+#cd ..
+
+wget https://github.com/vsres/php5.3/raw/master/conf/apache-2.2.22.tar.gz
+tar xzvf apache-$APACHE_VERSION.tar.gz
 
 # php
 wget http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror
