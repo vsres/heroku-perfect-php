@@ -85,7 +85,7 @@ echo $PWD
 #tar xzvf php.tar.gz
 
 # update config files
-cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
+#cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini php
 
 # make php available on bin
