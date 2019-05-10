@@ -49,13 +49,11 @@ mv mirror php-$PHP_VERSION.tar.gz
 tar xzvf php-$PHP_VERSION.tar.gz
 cd php-$PHP_VERSION/
 #./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
-./configure --prefix=/app/php     \
---with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
---with-iconv --with-gd       \
+#--with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
 #--with-iconv --with-gd --with-curl=/usr/lib                         \
 #--with-config-file-path=/app/php --enable-soap=shared               \
---enable-sockets
 #--with-openssl --enable-sockets
+./configure --prefix=/app/php --with-pgsql --with-pdo-pgsql --with-iconv --with-gd --with-config-file-path=/app/php --enable-sockets
 make
 make install
 cd ..
