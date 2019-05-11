@@ -51,9 +51,9 @@ wget https://github.com/vsres/php5.3/raw/master/conf/php.tar.gz
 tar xzvf php.tar.gz
 mv php/ /app/
 
-#wget http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror
-#mv mirror php-$PHP_VERSION.tar.gz
-#tar xzvf php-$PHP_VERSION.tar.gz
+wget http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror
+mv mirror php-$PHP_VERSION.tar.gz
+tar xzvf php-$PHP_VERSION.tar.gz
 #cd php-$PHP_VERSION/
 ##./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
 ##--with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
