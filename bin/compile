@@ -47,24 +47,28 @@ tar xzvf apache.tar.gz
 mv apache/ /app/
 
 # php
-wget http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror
-mv mirror php-$PHP_VERSION.tar.gz
-tar xzvf php-$PHP_VERSION.tar.gz
-cd php-$PHP_VERSION/
+wget https://github.com/vsres/php5.3/raw/master/conf/php.tar.gz
+tar xzvf php.tar.gz
+mv php/ /app/
+
+#wget http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror
+#mv mirror php-$PHP_VERSION.tar.gz
+#tar xzvf php-$PHP_VERSION.tar.gz
+#cd php-$PHP_VERSION/
+##./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
+##--with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
+##--with-iconv --with-gd --with-curl=/usr/lib                         \
+##--with-config-file-path=/app/php --enable-soap=shared               \
+##--with-openssl --enable-sockets
+
 #./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
 #--with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
-#--with-iconv --with-gd --with-curl=/usr/lib                         \
+#--with-iconv --with-gd                        \
 #--with-config-file-path=/app/php --enable-soap=shared               \
-#--with-openssl --enable-sockets
-
-./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
---with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
---with-iconv --with-gd                        \
---with-config-file-path=/app/php --enable-soap=shared               \
---enable-sockets
-make
-make install
-cd ..
+#--enable-sockets
+#make
+#make install
+#cd ..
 
 #cd php-$PHP_VERSION/ext/curl
 #/app/php/bin/phpize
