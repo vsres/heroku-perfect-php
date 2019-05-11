@@ -45,7 +45,7 @@ fi
 
 #wget https://github.com/vsres/php5.3/raw/master/conf/apache-2.2.22.tar.gz
 #tar xzvf apache-$APACHE_VERSION.tar.gz -C /app
-
+apt-get install curl libcurl4-gnutls-dev
 # php
 wget http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror
 mv mirror php-$PHP_VERSION.tar.gz
