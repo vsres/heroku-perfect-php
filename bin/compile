@@ -35,16 +35,16 @@ fi
 #curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
 # apache
-#wget http://archive.apache.org/dist/httpd/httpd-$APACHE_VERSION.tar.gz
-#tar xvzf httpd-$APACHE_VERSION.tar.gz
-#cd httpd-$APACHE_VERSION
-#./configure --prefix=/app/apache --enable-rewrite
-#make
-#make install
-#cd ..
+wget http://archive.apache.org/dist/httpd/httpd-$APACHE_VERSION.tar.gz
+tar xvzf httpd-$APACHE_VERSION.tar.gz
+cd httpd-$APACHE_VERSION
+./configure --prefix=/app/apache --enable-rewrite
+make
+make install
+cd ..
 
-wget https://github.com/vsres/php5.3/raw/master/conf/apache-2.2.22.tar.gz
-tar xzvf apache-$APACHE_VERSION.tar.gz -C /app
+#wget https://github.com/vsres/php5.3/raw/master/conf/apache-2.2.22.tar.gz
+#tar xzvf apache-$APACHE_VERSION.tar.gz -C /app
 
 # php
 wget http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror
@@ -72,20 +72,20 @@ cd ..
 #cp /usr/include/php5/ext/apc/apc_serializer.h /app/php/include/php/ext/apc/
 # package
 cd /app
-#echo $APACHE_VERSION > apache/VERSION
-#tar -zcvf apache.tar.gz apache
+echo $APACHE_VERSION > apache/VERSION
+tar -zcvf apache.tar.gz apache
 echo $PHP_VERSION > php/VERSION
 tar -zcvf php.tar.gz php
-#mv apache.tar.gz $BUILD_DIR
+mv apache.tar.gz $BUILD_DIR
 mv php.tar.gz $BUILD_DIR
 
 cd $BUILD_DIR
 echo $PWD 
-#tar xzvf apache.tar.gz
+tar xzvf apache.tar.gz
 tar xzvf php.tar.gz
 
 # update config files
-#cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
+cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini php
 
 # make php available on bin
