@@ -70,10 +70,18 @@ cd ..
 #/app/php/bin/phpize
 #./configure --with-php-config=/app/php/bin/php-config --with-curl
 
+wget https://curl.haxx.se/download/curl-7.35.0.tar.gz
+tar xzvf curl-7.35.0.tar.gz
+cd curl-7.35.0
+./configure --prefix=/app/curl
+make & make install
+cd..
+cd php-$PHP_VERSION/ext/curl
+/app/php/bin/phpize
+./configure --with-php-config=/app/php/bin/php-config --with-curl=/app/curl
 
-
-mv $LP_DIR/conf/imap.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/imap.so
-mv $LP_DIR/conf/curl.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/curl.so
+#mv $LP_DIR/conf/imap.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/imap.so
+#mv $LP_DIR/conf/curl.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/curl.so
 mv $LP_DIR/conf/openssl.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/openssl.so
 
 # pear
