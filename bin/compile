@@ -66,9 +66,9 @@ make
 make install
 cd ..
 
-cd php-$PHP_VERSION/ext/curl
-/app/php/bin/phpize
-./configure --with-php-config=/app/php/bin/php-config --with-curl
+#cd php-$PHP_VERSION/ext/curl
+#/app/php/bin/phpize
+#./configure --with-php-config=/app/php/bin/php-config --with-curl
 
 
 
