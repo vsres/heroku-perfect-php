@@ -79,7 +79,7 @@ tar xzvf curl-7.35.0.tar.gz
 cd curl-7.35.0
 ./configure --prefix=/app/curl
 make & make install
-cd..
+cd ..
 cd php-$PHP_VERSION/ext/curl
 /app/php/bin/phpize
 ./configure --with-php-config=/app/php/bin/php-config --with-curl=/app/curl
