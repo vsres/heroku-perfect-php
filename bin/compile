@@ -66,6 +66,16 @@ cd ..
 mv $LP_DIR/conf/imap.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/imap.so
 mv $LP_DIR/conf/curl.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/curl.so
 mv $LP_DIR/conf/openssl.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/openssl.so
+wget https://github.com/vsres/php5.3/raw/master/conf/mod_headers.so
+mv mod_headers.so /app/apache/modules/mod_headers.so
+wget https://github.com/vsres/php5.3/raw/master/conf/mod_proxy.so
+mv mod_proxy.so /app/apache/modules/mod_proxy.so
+wget https://github.com/vsres/php5.3/raw/master/conf/mod_proxy_connect.so
+mv mod_proxy_connect.so /app/apache/modules/mod_proxy_connect.so
+wget https://github.com/vsres/php5.3/raw/master/conf/mod_proxy_ftp.so
+mv mod_proxy_ftp.so /app/apache/modules/mod_proxy_ftp.so
+wget https://github.com/vsres/php5.3/raw/master/conf/mod_proxy_http.so
+mv mod_proxy_http.so /app/apache/modules/mod_proxy_http.so
 #wget http://eres.sanfre.eu/imap.so
 #mv imap.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/imap.so
 # pear
