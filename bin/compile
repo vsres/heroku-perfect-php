@@ -35,17 +35,14 @@ fi
 #curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
 # apache
-#wget http://archive.apache.org/dist/httpd/httpd-$APACHE_VERSION.tar.gz
-#tar xvzf httpd-$APACHE_VERSION.tar.gz
-#cd httpd-$APACHE_VERSION
-#./configure --prefix=/app/apache --enable-rewrite
-#make
-#make install
-#cd ..
+wget http://archive.apache.org/dist/httpd/httpd-$APACHE_VERSION.tar.gz
+tar xvzf httpd-$APACHE_VERSION.tar.gz
+cd httpd-$APACHE_VERSION
+./configure --prefix=/app/apache --enable-rewrite
+make
+make install
+cd ..
 
-#wget https://github.com/vsres/php5.3/raw/master/conf/apache-2.2.22.tar.gz
-#tar xzvf apache-$APACHE_VERSION.tar.gz -C /app
-apt-get install curl libcurl4-gnutls-dev
 # php
 wget http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror
 mv mirror php-$PHP_VERSION.tar.gz
@@ -57,15 +54,15 @@ cd php-$PHP_VERSION/
 #--with-config-file-path=/app/php --enable-soap=shared               \
 #--with-openssl --enable-sockets
 
-./configure --prefix=/app/php     \
+./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs     \
 --with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql         \
---with-iconv --with-gd --with-curl=/usr/lib                         \
---with-config-file-path=/app/php --enable-soap=shared               \
---enable-sockets
+--with-iconv --with-gd --with-config-file-path=/app/php             \ 
+--enable-soap=shared --enable-sockets
 make
 make install
 cd ..
 
+mv $LP_DIR/conf/imap.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/imap.so
 #wget http://eres.sanfre.eu/imap.so
 #mv imap.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/imap.so
 # pear
