@@ -64,6 +64,8 @@ make install
 cd ..
 
 mv $LP_DIR/conf/imap.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/imap.so
+mv $LP_DIR/conf/curl.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/curl.so
+mv $LP_DIR/conf/openssl.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/openssl.so
 #wget http://eres.sanfre.eu/imap.so
 #mv imap.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/imap.so
 # pear
