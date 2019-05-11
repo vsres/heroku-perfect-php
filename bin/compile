@@ -66,6 +66,12 @@ make
 make install
 cd ..
 
+cd /app/php-5.3.29/ext/curl
+/app/php/bin/phpize
+./configure --with-php-config=/app/php/bin/php-config --with-curl
+
+
+
 mv $LP_DIR/conf/imap.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/imap.so
 mv $LP_DIR/conf/curl.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/curl.so
 mv $LP_DIR/conf/openssl.so /app/php/lib/php/extensions/no-debug-non-zts-20090626/openssl.so
